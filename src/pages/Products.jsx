@@ -1,31 +1,29 @@
 import Layout from "../components/Layout";
-import { useEffect, useState } from "react";
 import { Card, Button, Row, Col } from "react-bootstrap";
+import { getGamesEndpoint } from "../api/endpoints";
+import { useFetch } from "../hooks/useFetch";
+import { getMGamesList } from "../api/adaptors";
 
 const Products = () => {
-  const [products, setProducts] = useState([]);
+  const gamesList = getGamesEndpoint();
 
-  useEffect(() => {
-    fetch("https://www.cheapshark.com/api/1.0/deals?pageSize=10")
-      .then((response) => response.json())
-      .then((products) => {
-        setProducts(products);
-      });
-  }, []);
+  const data = useFetch(gamesList);
 
-  console.log(products);
+  const adaptedGamesList = getMGamesList(data);
+
+  console.log(adaptedGamesList);
 
   return (
     <Layout>
       <Row>
-        {products.map((product) => {
+        {adaptedGamesList.map((product) => {
           return (
-            <Col lg={3} md={4} className="mb-4" key={product.dealID}>
+            <Col lg={3} md={4} className="mb-4" key={product.id}>
               <Card>
-                <Card.Img variant="top" src={product.thumb} />
+                <Card.Img variant="top" src={product.image} />
                 <Card.Body>
                   <Card.Title>{product.title} </Card.Title>
-                  <Card.Text>{product.salePrice} $</Card.Text>
+                  <Card.Text>{product.rating} $</Card.Text>
                   <Button variant="primary">Add to chart</Button>
                 </Card.Body>
               </Card>

@@ -1,5 +1,5 @@
-export const getGamesEndpoint = () => {
-  return `https://www.cheapshark.com/api/1.0/deals?pageSize=4`;
-};
+const API_KEY = "a6cc911b4877423191322ec9e1af7479";
 
-console.log(getGamesEndpoint);
+export const getGamesEndpoint = () => {
+  return `https://api.rawg.io/api/games?key=${API_KEY}`;
+};
