@@ -1,0 +1,22 @@
+.main {
+  max-width: 1270px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+.card {
+  padding: 20px;
+}
+
+img {
+  height: 180px;
+  object-fit: cover;
+}
+
+.title {
+  height: 50px;
+}
+.button {
+  background-color: blue;
+  width: 90%;
+}
