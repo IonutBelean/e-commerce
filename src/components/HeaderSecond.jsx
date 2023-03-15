@@ -14,6 +14,9 @@ const HeaderSecond = () => {
             <Nav.Link as={Link} to="/Products">
               Products
             </Nav.Link>
+            <Nav.Link as={Link} to="/Genres">
+              Genres
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

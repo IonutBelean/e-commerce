@@ -1,4 +1,4 @@
-export const getMGamesList = (apiResponse) => {
+export const getGamesList = (apiResponse) => {
   if (!apiResponse || !apiResponse.results) {
     return [];
   }

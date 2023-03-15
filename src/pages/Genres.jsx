@@ -1,6 +1,6 @@
 import Layout from "../components/Layout";
 import { Card, Button, Row, Col } from "react-bootstrap";
-import { getGamesEndpoint } from "../api/endpoints";
+import { getGenresGamesEndpoint } from "../api/endpoints";
 import { useFetch } from "../hooks/useFetch";
 import { getGamesList } from "../api/adaptors";
 import ProducsCSS from "./Products.module.css";
@@ -8,10 +8,10 @@ import { addToCart } from "../store/Cart/actions";
 import { useContext } from "react";
 import { CartContext } from "../store/Cart/context";
 
-const Products = () => {
+const Genres = () => {
   const { cartDispatch } = useContext(CartContext);
 
-  const gamesList = getGamesEndpoint();
+  const gamesList = getGenresGamesEndpoint();
 
   const data = useFetch(gamesList);
 
@@ -62,4 +62,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default Genres;
