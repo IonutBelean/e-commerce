@@ -3,6 +3,7 @@ import ProductCSS from "./ProductCard.module.css";
 import { addToCart } from "../store/Cart/actions";
 import { useContext } from "react";
 import { CartContext } from "../store/Cart/context";
+import { Link } from "react-router-dom";
 
 const ProductCard = (props) => {
   const { id, image, title, rating } = props;
@@ -23,19 +24,21 @@ const ProductCard = (props) => {
 
   return (
     <div className={ProductCSS.main}>
-      <Card className={ProductCSS.card} key={id}>
-        <Card.Img variant="top" src={image} />
-        <Card.Body>
-          <Card.Title className={ProductCSS.title}>{title} </Card.Title>
-          <Card.Text>{rating} $</Card.Text>
-          <Button
-            className={ProductCSS.button}
-            onClick={() => handleAddToCart()}
-          >
-            Add to chart
-          </Button>
-        </Card.Body>
-      </Card>
+      <Link to={`/GamesDetails/${id}`}>
+        <Card className={ProductCSS.card} key={id}>
+          <Card.Img variant="top" src={image} />
+          <Card.Body>
+            <Card.Title className={ProductCSS.title}>{title} </Card.Title>
+            <Card.Text>{rating} $</Card.Text>
+            <Button
+              className={ProductCSS.button}
+              onClick={() => handleAddToCart()}
+            >
+              Add to chart
+            </Button>
+          </Card.Body>
+        </Card>
+      </Link>
     </div>
   );
 };

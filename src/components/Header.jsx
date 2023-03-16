@@ -33,7 +33,7 @@ const Header = () => {
               Favourite
             </Nav.Link>
             <Nav.Link as={Link} to="/Cart">
-              Cart{totalProducts > 0 && `${totalProducts}`}
+              Cart {totalProducts > 0 && `${totalProducts}`}
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

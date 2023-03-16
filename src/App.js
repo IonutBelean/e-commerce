@@ -8,6 +8,8 @@ import { cartReducer, initialState } from "./store/Cart/reducer";
 import { CartContext } from "./store/Cart/context";
 import ActionGames from "./pages/ActionGames";
 import RacingGames from "./pages/RacingGames";
+import ShooterGames from "./pages/ShooterGames";
+import GamesDetails from "./pages/GamesDetails";
 
 function App() {
   const [cartState, cartDispatch] = useReducer(cartReducer, initialState);
@@ -25,6 +27,8 @@ function App() {
         <Route path="/AllGames" element={<AllGames />} />
         <Route path="/ActionGames" element={<ActionGames />} />
         <Route path="/RacingGames" element={<RacingGames />} />
+        <Route path="/ShooterGames" element={<ShooterGames />} />
+        <Route path="/GamesDetails/:gameId" element={<GamesDetails />} />
       </Routes>
     </CartContext.Provider>
   );

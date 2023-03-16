@@ -11,3 +11,11 @@ export const getActionGamesEndpoint = (page = 1) => {
 export const getRacingGamesEndpoint = (page = 1) => {
   return `https://api.rawg.io/api/games?key=${API_KEY}&genres=racing&page=${page}`;
 };
+
+export const getShooterGamesEndpoint = (page = 1) => {
+  return `https://api.rawg.io/api/games?key=${API_KEY}&genres=shooter&page=${page}`;
+};
+
+export const getGamesDetailsEndpoint = (gameId) => {
+  return `https://api.rawg.io/api/games/${gameId}?key=${API_KEY}`;
+};

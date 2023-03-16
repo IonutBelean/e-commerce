@@ -20,7 +20,7 @@ const Cart = () => {
             <div className="m-3" key={product.id}>
               <div className="d-flex justify-content-between align-items-center mb-3">
                 <h3>{product.title}</h3>
-                <img src={product.image} />
+                <img src={product.image} alt="game" />
                 <p>
                   {product.quantity} x {product.rating}$ ={" "}
                   {product.quantity * product.rating}$
