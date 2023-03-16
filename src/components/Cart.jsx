@@ -17,8 +17,15 @@ const Cart = () => {
       {cartState.products.length > 0 ? (
         cartState.products.map((product) => {
           return (
-            <div key={product.id}>
-              <h3>{product.title}</h3>
+            <div className="m-3" key={product.id}>
+              <div className="d-flex justify-content-between align-items-center mb-3">
+                <h3>{product.title}</h3>
+                <img src={product.image} />
+                <p>
+                  {product.quantity} x {product.rating}$ ={" "}
+                  {product.quantity * product.rating}$
+                </p>
+              </div>
               <Button onClick={() => handleDelete(product.id)}>Delete</Button>
             </div>
           );

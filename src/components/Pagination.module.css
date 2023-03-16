@@ -1,0 +1,9 @@
+#paginationActive {
+  background-color: #0b0c10;
+  border: 1px solid #0b0c10;
+  color: #c5c6c7;
+}
+#paginationInactive {
+  background-color: #c5c6c7;
+  border: 1px solid #0b0c10;
+}

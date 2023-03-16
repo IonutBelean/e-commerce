@@ -1,7 +1,6 @@
 .main {
   max-width: 1270px;
   margin: 0 auto;
-  padding: 20px 0;
 }
 
 .card {
@@ -14,7 +13,7 @@ img {
 }
 
 .title {
-  height: 50px;
+  height: 70px;
 }
 .button {
   background-color: blue;

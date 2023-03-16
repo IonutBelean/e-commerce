@@ -1,12 +1,13 @@
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
-import Products from "./pages/Products";
+import AllGames from "./pages/AllGames";
 import "./App.css";
 import Cart from "./components/Cart";
 import { useReducer } from "react";
 import { cartReducer, initialState } from "./store/Cart/reducer";
 import { CartContext } from "./store/Cart/context";
-import Genres from "./pages/Genres";
+import ActionGames from "./pages/ActionGames";
+import RacingGames from "./pages/RacingGames";
 
 function App() {
   const [cartState, cartDispatch] = useReducer(cartReducer, initialState);
@@ -20,9 +21,10 @@ function App() {
     <CartContext.Provider value={cartContextValue}>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/Products" element={<Products />} />
         <Route path="/Cart" element={<Cart />} />
-        <Route path="/Genres" element={<Genres />} />
+        <Route path="/AllGames" element={<AllGames />} />
+        <Route path="/ActionGames" element={<ActionGames />} />
+        <Route path="/RacingGames" element={<RacingGames />} />
       </Routes>
     </CartContext.Provider>
   );
