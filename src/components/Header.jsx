@@ -1,7 +1,9 @@
 import { useContext } from "react";
-import { Nav, Navbar, Container, Form, Button } from "react-bootstrap";
+import { Nav, Navbar, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { CartContext } from "../store/Cart/context";
+
+import SearchBar from "./SearchBar";
 
 const Header = () => {
   const { cartState } = useContext(CartContext);
@@ -20,16 +22,8 @@ const Header = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Form className="d-flex">
-              <Form.Control
-                type="search"
-                placeholder="Search"
-                className="me-2"
-                aria-label="Search"
-              />
-              <Button variant="outline-success">Search</Button>
-            </Form>
-            <Nav.Link as={Link} to="/">
+            <SearchBar />
+            <Nav.Link as={Link} to="/Favorites">
               Favourite
             </Nav.Link>
             <Nav.Link as={Link} to="/Cart">

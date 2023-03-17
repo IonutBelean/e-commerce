@@ -19,3 +19,7 @@ export const getShooterGamesEndpoint = (page = 1) => {
 export const getGamesDetailsEndpoint = (gameId) => {
   return `https://api.rawg.io/api/games/${gameId}?key=${API_KEY}`;
 };
+
+export const getSearchGamesEndpoint = (title) => {
+  return `https://api.rawg.io/api/games?key=${API_KEY}&search=${title}`;
+};

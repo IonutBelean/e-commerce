@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Button } from "react-bootstrap";
 import { removeFromCart } from "../store/Cart/actions";
 import { CartContext } from "../store/Cart/context";
-import Layout from "./Layout";
+import Layout from "../components/Layout";
 
 const Cart = () => {
   const { cartState, cartDispatch } = useContext(CartContext);
