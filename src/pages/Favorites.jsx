@@ -1,12 +1,22 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Button, Card, Col } from "react-bootstrap";
 import Layout from "../components/Layout";
 import { removeFromFavorites } from "../store/Favorites/action";
 import { FavoritesContext } from "../store/Favorites/context";
 import { Link } from "react-router-dom";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 const Favorites = () => {
   const { favoritesState, favoritesDispatch } = useContext(FavoritesContext);
+
+  const [_, setLocalStorageState] = useLocalStorage(
+    "favorites",
+    favoritesState
+  );
+
+  useEffect(() => {
+    setLocalStorageState(favoritesState);
+  }, [favoritesState, setLocalStorageState]);
 
   const handleDelete = (id) => {
     const actionResult = removeFromFavorites(id);

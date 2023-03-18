@@ -1,11 +1,18 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { removeFromCart } from "../store/Cart/actions";
 import { CartContext } from "../store/Cart/context";
 import Layout from "../components/Layout";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 const Cart = () => {
   const { cartState, cartDispatch } = useContext(CartContext);
+
+  const [_, setCartLocalStorageState] = useLocalStorage("cart", cartState);
+
+  useEffect(() => {
+    setCartLocalStorageState(cartState);
+  }, [cartState, setCartLocalStorageState]);
 
   const handleDelete = (id) => {
     const actionResult = removeFromCart(id);

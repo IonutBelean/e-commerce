@@ -16,12 +16,24 @@ import {
 } from "./store/Favorites/reducer";
 import Favorites from "./pages/Favorites";
 import { FavoritesContext } from "./store/Favorites/context";
+import { useLocalStorage } from "./hooks/useLocalStorage";
 
 function App() {
-  const [cartState, cartDispatch] = useReducer(cartReducer, initialState);
+  const [initialLocalStorageState] = useLocalStorage(
+    "favorites",
+    initialFavoritesState
+  );
+
+  const [initialCartLocalStorageState] = useLocalStorage("cart", initialState);
+
+  const [cartState, cartDispatch] = useReducer(
+    cartReducer,
+    initialCartLocalStorageState
+  );
+
   const [favoritesState, favoritesDispatch] = useReducer(
     favoritesReducer,
-    initialFavoritesState
+    initialLocalStorageState
   );
 
   const cartContextValue = {
