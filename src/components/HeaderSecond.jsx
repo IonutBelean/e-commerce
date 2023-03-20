@@ -17,11 +17,11 @@ const HeaderSecond = () => {
             <Nav.Link as={Link} to="/ActionGames">
               Action
             </Nav.Link>
-            <Nav.Link as={Link} to="/RacingGames">
-              Racing
-            </Nav.Link>
             <Nav.Link as={Link} to="/ShooterGames">
               Shooter
+            </Nav.Link>
+            <Nav.Link as={Link} to="/RacingGames">
+              Racing
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

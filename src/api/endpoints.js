@@ -4,16 +4,8 @@ export const getAllGamesEndpoint = (page = 1) => {
   return `https://api.rawg.io/api/games?key=${API_KEY}&page=${page}`;
 };
 
-export const getActionGamesEndpoint = (page = 1) => {
-  return `https://api.rawg.io/api/games?key=${API_KEY}&genres=action&page=${page}`;
-};
-
-export const getRacingGamesEndpoint = (page = 1) => {
-  return `https://api.rawg.io/api/games?key=${API_KEY}&genres=racing&page=${page}`;
-};
-
-export const getShooterGamesEndpoint = (page = 1) => {
-  return `https://api.rawg.io/api/games?key=${API_KEY}&genres=shooter&page=${page}`;
+export const getGenresGamesEndpoint = (category, page = 1, pageSize = 20) => {
+  return `https://api.rawg.io/api/games?key=${API_KEY}&genres=${category}&page=${page}&page_size=${pageSize}`;
 };
 
 export const getGamesDetailsEndpoint = (gameId) => {

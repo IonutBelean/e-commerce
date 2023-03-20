@@ -1,5 +1,5 @@
 import Layout from "../components/Layout";
-import { getActionGamesEndpoint } from "../api/endpoints";
+import { getGenresGamesEndpoint } from "../api/endpoints";
 import { useFetch } from "../hooks/useFetch";
 import { getGamesList } from "../api/adaptors";
 import Pagination from "../components/Pagination";
@@ -15,15 +15,15 @@ const ActionGames = () => {
     currentPage = 1;
   }
 
-  const gamesList = getActionGamesEndpoint(currentPage);
+  const actionGamesList = getGenresGamesEndpoint("action", currentPage, 20);
 
-  const data = useFetch(gamesList);
+  const data = useFetch(actionGamesList);
 
   const adaptedGamesList = getGamesList(data);
 
   return (
     <Layout>
-      <h1>Action Games</h1>
+      <h1 className="text-center">Action Games</h1>
       <ProductCardList data={adaptedGamesList} />
       <Pagination currentPage={currentPage} baseUrl="/ActionGames/" />
     </Layout>

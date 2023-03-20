@@ -23,7 +23,7 @@ const AllGames = () => {
 
   return (
     <Layout>
-      <h1>All Games</h1>
+      <h1 className="text-center">All Games</h1>
       <ProductCardList data={adaptedGamesList} />
       <Pagination currentPage={currentPage} baseUrl="/AllGames/" />
     </Layout>

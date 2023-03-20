@@ -1,10 +1,10 @@
 import Layout from "../components/Layout";
-import { getRacingGamesEndpoint } from "../api/endpoints";
 import { useFetch } from "../hooks/useFetch";
 import { getGamesList } from "../api/adaptors";
 import Pagination from "../components/Pagination";
 import ProductCardList from "../components/ProductCardList";
 import { useLocation } from "react-router-dom";
+import { getGenresGamesEndpoint } from "../api/endpoints";
 
 const RacingGames = () => {
   const queryParams = new URLSearchParams(useLocation().search);
@@ -15,15 +15,15 @@ const RacingGames = () => {
     currentPage = 1;
   }
 
-  const gamesList = getRacingGamesEndpoint(currentPage);
+  const racingGamesList = getGenresGamesEndpoint("racing", currentPage, 20);
 
-  const data = useFetch(gamesList);
+  const data = useFetch(racingGamesList);
 
   const adaptedGamesList = getGamesList(data);
 
   return (
     <Layout>
-      <h1>Action Games</h1>
+      <h1 className="text-center">Racing Games</h1>
       <ProductCardList data={adaptedGamesList} />
       <Pagination currentPage={currentPage} baseUrl="/ActionGames/" />
     </Layout>
