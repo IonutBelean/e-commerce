@@ -1,0 +1,11 @@
+.container {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  background-color: #bad7e9;
+}
+.main {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}

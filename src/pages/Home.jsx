@@ -5,6 +5,7 @@ import ProductCardList from "../components/ProductCardList";
 import { getGamesList } from "../api/adaptors";
 import { Link } from "react-router-dom";
 import { Container } from "react-bootstrap";
+import StarRrating from "../components/StarRating";
 
 const Home = () => {
   const actionGamesList = getGenresGamesEndpoint("action", 1, 8);
@@ -35,7 +36,7 @@ const Home = () => {
         <h1 className="text-center">Shooter Games</h1>
         <ProductCardList data={adaptedShooterGamesList} />
         <div className="text-center">
-          Vezi toate jocurile de actiune în categoria{" "}
+          More of this{" "}
           <Link to="/ShooterGames/" className="text-secondary">
             Shooter
           </Link>

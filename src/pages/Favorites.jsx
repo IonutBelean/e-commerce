@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { Button, Card, Col } from "react-bootstrap";
+import { Button, Card, Col, Row, Container } from "react-bootstrap";
 import Layout from "../components/Layout";
 import { removeFromFavorites } from "../store/Favorites/action";
 import { FavoritesContext } from "../store/Favorites/context";
@@ -39,33 +39,35 @@ const Favorites = () => {
 
   return (
     <Layout>
-      {favoritesState.products.length > 0 ? (
-        favoritesState.products.map((product) => {
-          return (
-            <div>
-              <Col lg={3} md={4} className="mb-4">
-                <Card key={product.id}>
-                  <Link to={`/GamesDetails/${product.id}`}>
-                    <Card.Body>
-                      <Card.Img variant="top" src={product.image} />
-                      <Card.Title>{product.title} </Card.Title>
-                      <Card.Text>{product.rating} $</Card.Text>
-                    </Card.Body>
-                  </Link>
-                </Card>
-                <Button onClick={() => handleDelete(product.id)}>
-                  Delete from favorites
-                </Button>
-                <Button onClick={() => handleAddToCart(product)}>
-                  Add to chart
-                </Button>
-              </Col>
-            </div>
-          );
-        })
-      ) : (
-        <p>Nu ai produse in cos!</p>
-      )}
+      <Container>
+        <Row>
+          {favoritesState.products.length > 0 ? (
+            favoritesState.products.map((product) => {
+              return (
+                <Col lg={3} md={4} className="mb-4">
+                  <Card key={product.id}>
+                    <Link to={`/GamesDetails/${product.id}`}>
+                      <Card.Body>
+                        <Card.Img variant="top" src={product.image} />
+                        <Card.Title>{product.title} </Card.Title>
+                        <Card.Text>{product.rating} $</Card.Text>
+                      </Card.Body>
+                    </Link>
+                  </Card>
+                  <Button onClick={() => handleDelete(product.id)}>
+                    Delete from favorites
+                  </Button>
+                  <Button onClick={() => handleAddToCart(product)}>
+                    Add to chart
+                  </Button>
+                </Col>
+              );
+            })
+          ) : (
+            <p className="text-center">Nu ai produse in cos!</p>
+          )}
+        </Row>
+      </Container>
     </Layout>
   );
 };

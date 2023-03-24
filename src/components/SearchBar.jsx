@@ -22,15 +22,17 @@ const SearchBar = () => {
 
   const adaptedGamesList = getGamesList(data);
 
-  // console.log(adaptedGamesList);
+  const handleSearch = (value) => {
+    setQuery(value);
 
-  const handleSearch = () => {
-    console.log(
-      adaptedGamesList.filter((game) =>
-        game.title.toLowerCase().includes(query)
-      )
+    const results = adaptedGamesList.filter(
+      (game) =>
+        value && game && game.title && game.title.toLowerCase().includes(value)
     );
+
+    console.log(results);
   };
+
   return (
     <Form className="d-flex">
       <Form.Control
@@ -38,11 +40,10 @@ const SearchBar = () => {
         placeholder="Search"
         className="me-2"
         aria-label="Search"
-        onChange={(e) => setQuery(e.target.value)}
+        onChange={(e) => handleSearch(e.target.value)}
+        value={query}
       />
-      <Button variant="outline-success" onClick={handleSearch}>
-        Search
-      </Button>
+      <Button variant="outline-success">Search</Button>
     </Form>
   );
 };

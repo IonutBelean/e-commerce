@@ -1,22 +1,27 @@
-import { Row, Col, Container, Button } from "react-bootstrap";
+import { Row, Col, Container, Button, Alert } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import Layout from "../components/Layout";
 import { getGamesDetailsEndpoint } from "../api/endpoints";
 import { useFetch } from "../hooks/useFetch";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CartContext } from "../store/Cart/context";
 import { addToCart } from "../store/Cart/actions";
+import { FavoritesContext } from "../store/Favorites/context";
+import { addToFavorites } from "../store/Favorites/action";
+import GamesDetailsCSS from "./GamesDetails.module.css";
 
 const GamesDetails = () => {
   const { cartDispatch } = useContext(CartContext);
+  const { favoritesDispatch } = useContext(FavoritesContext);
+
+  const [isFavAlertDisplayed, setIsFavAlertDisplayed] = useState(false);
+  const [isCartAlertDisplayed, setIsCartAlertDisplayed] = useState(false);
 
   const { gameId } = useParams();
 
   const gamesDetails = getGamesDetailsEndpoint(gameId);
 
   const data = useFetch(gamesDetails);
-
-  console.log(data);
 
   const {
     id,
@@ -36,13 +41,43 @@ const GamesDetails = () => {
       title: name,
       rating,
     };
-    console.log(cartToAdd);
     const actionResult = addToCart(cartToAdd);
     cartDispatch(actionResult);
+
+    setIsCartAlertDisplayed(true);
+    setTimeout(() => {
+      setIsCartAlertDisplayed(false);
+    }, 2500);
+  };
+
+  const handleAddToFavorites = () => {
+    const favoritesToAdd = {
+      id,
+      image: background_image_additional,
+      title: name,
+      rating,
+    };
+    const actionResult = addToFavorites(favoritesToAdd);
+    favoritesDispatch(actionResult);
+
+    setIsFavAlertDisplayed(true);
+    setTimeout(() => {
+      setIsFavAlertDisplayed(false);
+    }, 2500);
   };
 
   return (
     <Layout>
+      {isFavAlertDisplayed && (
+        <Alert variant="success" className={GamesDetailsCSS.alert}>
+          Succes! Poți vedea produsul in Favorite.
+        </Alert>
+      )}
+      {isCartAlertDisplayed && (
+        <Alert variant="primary" className={GamesDetailsCSS.alert}>
+          Produsul a fost adaugat cu succes in Cos!
+        </Alert>
+      )}
       <Container>
         <Row>
           <Col xs={12} lg={8} key={id}>
@@ -58,6 +93,7 @@ const GamesDetails = () => {
               </a>
             </h5>
             <Button onClick={handleAddToCart}>Add to cart</Button>
+            <Button onClick={handleAddToFavorites}>Add to Favorites</Button>
           </Col>
         </Row>
       </Container>

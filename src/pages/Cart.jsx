@@ -38,7 +38,7 @@ const Cart = () => {
           );
         })
       ) : (
-        <p>Nu ai produse in cos!</p>
+        <p className="text-center">Nu ai produse in cos!</p>
       )}
     </Layout>
   );
