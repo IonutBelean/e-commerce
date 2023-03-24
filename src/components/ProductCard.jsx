@@ -66,7 +66,7 @@ const ProductCard = (props) => {
       <Card className={ProductCSS.card} key={id}>
         <div className={ProductCSS.sales}>90n%</div>
         <Link to={`/GamesDetails/${id}`}>
-          <Card.Body>
+          <Card.Body className={ProductCSS.card_body}>
             <Card.Img variant="top" src={image} />
             <Card.Title className={ProductCSS.title}>{title}</Card.Title>
             <Card.Text className={ProductCSS.price}>
@@ -74,7 +74,7 @@ const ProductCard = (props) => {
             </Card.Text>
           </Card.Body>
         </Link>
-        <StarRrating />
+        <StarRrating id={id} />
         <Button
           className={ProductCSS.button_cart}
           onClick={() => handleAddToCart()}

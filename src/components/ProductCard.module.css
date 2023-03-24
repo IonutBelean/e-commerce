@@ -3,8 +3,8 @@
   margin: 0 auto;
 }
 
-.card {
-  /* padding: 10px; */
+.card_body {
+  margin-bottom: -10px;
 }
 
 img {
