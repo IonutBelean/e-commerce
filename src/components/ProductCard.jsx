@@ -64,7 +64,7 @@ const ProductCard = (props) => {
         </Alert>
       )}
       <Card className={ProductCSS.card} key={id}>
-        <div className={ProductCSS.sales}>90n%</div>
+        <div className={ProductCSS.sales}>90%</div>
         <Link to={`/GamesDetails/${id}`}>
           <Card.Body className={ProductCSS.card_body}>
             <Card.Img variant="top" src={image} />

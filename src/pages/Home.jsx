@@ -26,7 +26,7 @@ const Home = () => {
         <h1 className="text-center">Action Games</h1>
         <ProductCardList data={adaptedActionGamesList} />
         <div className="text-center">
-          Vezi toate jocurile de actiune în categoria{" "}
+          More here{" "}
           <Link to="/ActionGames/" className="text-secondary">
             Action
           </Link>
@@ -36,7 +36,7 @@ const Home = () => {
         <h1 className="text-center">Shooter Games</h1>
         <ProductCardList data={adaptedShooterGamesList} />
         <div className="text-center">
-          More of this{" "}
+          More here{" "}
           <Link to="/ShooterGames/" className="text-secondary">
             Shooter
           </Link>
@@ -46,7 +46,7 @@ const Home = () => {
         <h1 className="text-center">Racing Games</h1>
         <ProductCardList data={adaptedRacingGamesList} />
         <div className="text-center">
-          Vezi toate jocurile de actiune în categoria{" "}
+          More here{" "}
           <Link to="/RacingGames/" className="text-secondary">
             Racing
           </Link>

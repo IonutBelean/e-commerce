@@ -18,28 +18,30 @@ const Header = () => {
   }, 0);
 
   return (
-    <Container className={HeaderCSS.main}>
+    <div className={HeaderCSS.container}>
       <Navbar expand="lg" className={HeaderCSS.nav}>
-        <Container>
+        <Container className="d-flex justify-content-between">
           <Navbar.Brand as={Link} to="/">
             UnderFive
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className={HeaderCSS.links}>
-              <SearchBar setResults={setResults} />
-              <SearchBarResults results={results} />
-              <Nav.Link as={Link} to="/Favorites">
-                Favourite
-              </Nav.Link>
-              <Nav.Link as={Link} to="/Cart">
-                Cart {totalProducts > 0 && `${totalProducts}`}
-              </Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
+          <SearchBar setResults={setResults} />
+          <div>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className={HeaderCSS.links}>
+                <SearchBarResults results={results} />
+                <Nav.Link as={Link} to="/Favorites">
+                  Favourite
+                </Nav.Link>
+                <Nav.Link as={Link} to="/Cart">
+                  Cart {totalProducts > 0 && `${totalProducts}`}
+                </Nav.Link>
+              </Nav>
+            </Navbar.Collapse>
+          </div>
         </Container>
       </Navbar>
-    </Container>
+    </div>
   );
 };
 
