@@ -9,3 +9,13 @@
   justify-content: space-between !important;
   background-color: var(--bg-main);
 }
+
+.orizontal {
+  margin: 0;
+  background: radial-gradient(
+    circle,
+    rgba(235, 69, 95, 1) 0%,
+    rgba(43, 52, 103, 1) 90%
+  );
+  height: 5px;
+}

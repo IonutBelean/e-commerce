@@ -16,7 +16,7 @@
 }
 
 body {
-  background-color: #f2f2f7 !important;
+  background-color: var(--bg-main) !important;
 }
 
 a {
@@ -24,8 +24,11 @@ a {
 }
 
 h1 {
-  color: black;
   font-weight: 600 !important;
+  padding: 20px 0;
+}
+
+h2 {
   padding: 20px 0;
 }
 

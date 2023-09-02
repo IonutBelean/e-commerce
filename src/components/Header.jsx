@@ -41,6 +41,7 @@ const Header = () => {
           </div>
         </Container>
       </Navbar>
+      <div className={HeaderCSS.orizontal}></div>
     </div>
   );
 };
