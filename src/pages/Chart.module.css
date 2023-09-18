@@ -11,4 +11,6 @@
 
 .xmark {
   float: right;
+  margin-top: 2px;
+  cursor: pointer;
 }

@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { removeFromCart } from "../store/Cart/actions";
 import { CartContext } from "../store/Cart/context";
@@ -23,10 +23,10 @@ const Cart = () => {
     cartDispatch(actionResult);
   };
 
-  const message = document.querySelector("#message");
+  const [show, setShow] = useState(true);
 
   const handleXmarkClick = () => {
-    message.visibility = "hidden";
+    setShow(false);
   };
 
   return (
@@ -49,7 +49,7 @@ const Cart = () => {
               </div>
             );
           })
-        ) : (
+        ) : show ? (
           <p className={ChartCSS.empty} id="message">
             <FontAwesomeIcon icon={faFaceFrown} className="fa-xl me-2" />
             Your shopping cart contains no products. To add products to the
@@ -61,7 +61,7 @@ const Cart = () => {
               onClick={handleXmarkClick}
             />
           </p>
-        )}
+        ) : null}
       </Container>
     </LayoutSecond>
   );

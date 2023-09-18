@@ -1,9 +1,10 @@
 #paginationActive {
-  background-color: #0b0c10;
+  background-color: var(--bg-cart);
   border: 1px solid #0b0c10;
-  color: #c5c6c7;
+  color: #fff;
 }
 #paginationInactive {
-  background-color: #c5c6c7;
-  border: 1px solid #0b0c10;
+  background-color: #fff;
+  border: 1px solid var(--bg-fav);
+  color: var(--bg-fav);
 }
