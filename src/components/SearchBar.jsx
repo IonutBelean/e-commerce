@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useLocation } from "react-router-dom";
 
 const SearchBar = () => {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState([]);
 
   const queryParams = new URLSearchParams(useLocation().search);
 

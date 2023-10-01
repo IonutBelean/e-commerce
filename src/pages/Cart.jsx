@@ -4,7 +4,7 @@ import { removeFromCart } from "../store/Cart/actions";
 import { CartContext } from "../store/Cart/context";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { Container } from "react-bootstrap";
-import ChartCSS from "./Chart.module.css";
+import CartCSS from "./Cart.module.css";
 import LayoutSecond from "../components/LayoutSecond";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFaceFrown, faXmark } from "@fortawesome/free-solid-svg-icons";
@@ -31,8 +31,8 @@ const Cart = () => {
 
   return (
     <LayoutSecond>
-      <Container className={ChartCSS.cart}>
-        <h2>My Chart</h2>
+      <Container className={CartCSS.cart}>
+        <h2>My Cart</h2>
         {cartState.products.length > 0 ? (
           cartState.products.map((product) => {
             return (
@@ -50,14 +50,14 @@ const Cart = () => {
             );
           })
         ) : show ? (
-          <p className={ChartCSS.empty} id="message">
+          <p className={CartCSS.empty} id="message">
             <FontAwesomeIcon icon={faFaceFrown} className="fa-xl me-2" />
             Your shopping cart contains no products. To add products to the
             basket, please return to the <a href="/">store</a>.
             <FontAwesomeIcon
               icon={faXmark}
               size="xl"
-              className={`${ChartCSS.xmark} `}
+              className={`${CartCSS.xmark} `}
               onClick={handleXmarkClick}
             />
           </p>
