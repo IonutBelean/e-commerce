@@ -6,6 +6,8 @@ import { getGamesList } from "../api/adaptors";
 import { Link } from "react-router-dom";
 import { Container } from "react-bootstrap";
 
+import HomeCss from "./Home.module.css";
+
 const Home = () => {
   const actionGamesList = getGenresGamesEndpoint("action", 1, 8);
   const shooterGamesList = getGenresGamesEndpoint("shooter", 1, 8);
@@ -21,7 +23,7 @@ const Home = () => {
 
   return (
     <Layout>
-      <Container className="mb-5">
+      <Container className={` mb-5`}>
         <h1 className="text-center">Action Games</h1>
         <ProductCardList data={adaptedActionGamesList} />
         <div className="text-center">

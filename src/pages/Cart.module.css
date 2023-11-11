@@ -1,3 +1,49 @@
+.cart {
+  min-height: 100vh;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.price {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.quantity {
+  width: 50px;
+  height: 50px;
+  font-size: 25px;
+  background-color: var(--bg-main);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.amount {
+  color: red;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+.delete {
+  background-color: var(--bg-cart) !important;
+  border: none !important;
+  margin: 0 auto 5px auto;
+}
+
 .empty {
   background-color: #fff;
   padding: 10px;

@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 import { removeFromCart } from "../store/Cart/actions";
 import { CartContext } from "../store/Cart/context";
 import { useLocalStorage } from "../hooks/useLocalStorage";
-import { Container } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import CartCSS from "./Cart.module.css";
 import LayoutSecond from "../components/LayoutSecond";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -36,21 +36,40 @@ const Cart = () => {
         {cartState.products.length > 0 ? (
           cartState.products.map((product) => {
             return (
-              <div className="m-3" key={product.id}>
-                <div className="d-flex justify-content-between align-items-center mb-3">
-                  <h3>{product.title}</h3>
-                  <img src={product.image} alt="game" />
-                  <p>
-                    {product.quantity} x {product.rating}$ ={" "}
-                    {product.quantity * product.rating}$
-                  </p>
+              <div className={`mb-5`} key={product.id}>
+                <div className={`${CartCSS.card} `}>
+                  <Row>
+                    <Col className={CartCSS.title}>
+                      <h3>{product.title}</h3>
+                    </Col>
+                    <Col>
+                      <img src={product.image} alt="game" />
+                    </Col>
+                    <Col className={CartCSS.price}>
+                      <div>
+                        <div className={CartCSS.quantity}>
+                          {product.quantity}
+                        </div>
+                        <div className={CartCSS.amount}>
+                          {product.quantity * product.rating}$
+                        </div>
+                        {/* {product.quantity} x {product.rating}$ ={" "}
+                        {product.quantity * product.rating}$ */}
+                      </div>
+                    </Col>
+                  </Row>
                 </div>
-                <Button onClick={() => handleDelete(product.id)}>Delete</Button>
+                <Button
+                  onClick={() => handleDelete(product.id)}
+                  className={`${CartCSS.delete}`}
+                >
+                  Remove from cart
+                </Button>
               </div>
             );
           })
         ) : show ? (
-          <p className={CartCSS.empty} id="message">
+          <p className={CartCSS.empty}>
             <FontAwesomeIcon icon={faFaceFrown} className="fa-xl me-2" />
             Your shopping cart contains no products. To add products to the
             basket, please return to the <a href="/">store</a>.

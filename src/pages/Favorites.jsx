@@ -1,12 +1,15 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Button, Card, Col, Row, Container } from "react-bootstrap";
-import Layout from "../components/Layout";
 import { removeFromFavorites } from "../store/Favorites/action";
 import { FavoritesContext } from "../store/Favorites/context";
 import { Link } from "react-router-dom";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { CartContext } from "../store/Cart/context";
 import { addToCart } from "../store/Cart/actions";
+import FavoriteCSS from "./Favorites.module.css";
+import { faFaceFrown, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import LayoutSecond from "../components/LayoutSecond";
 
 const Favorites = () => {
   const { favoritesState, favoritesDispatch } = useContext(FavoritesContext);
@@ -37,9 +40,16 @@ const Favorites = () => {
     favoritesDispatch(actionResult);
   };
 
+  const [show, setShow] = useState(true);
+
+  const handleXmarkClick = () => {
+    setShow(false);
+  };
+
   return (
-    <Layout>
-      <Container>
+    <LayoutSecond>
+      <Container className={`${FavoriteCSS.container}`}>
+        <h2>My Favorites Games</h2>
         <Row>
           {favoritesState.products.length > 0 ? (
             favoritesState.products.map((product) => {
@@ -63,12 +73,22 @@ const Favorites = () => {
                 </Col>
               );
             })
-          ) : (
-            <p className="text-center">Nu ai produse in cos!</p>
-          )}
+          ) : show ? (
+            <p className={FavoriteCSS.empty}>
+              <FontAwesomeIcon icon={faFaceFrown} className="fa-xl me-2" />
+              Your shopping cart contains no products. To add products to the
+              basket, please return to the <a href="/">store</a>.
+              <FontAwesomeIcon
+                icon={faXmark}
+                size="xl"
+                className={`${FavoriteCSS.xmark} `}
+                onClick={handleXmarkClick}
+              />
+            </p>
+          ) : null}
         </Row>
       </Container>
-    </Layout>
+    </LayoutSecond>
   );
 };
 

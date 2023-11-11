@@ -1,17 +1,17 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Nav, Navbar, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { CartContext } from "../store/Cart/context";
 import HeaderCSS from "./Header.module.css";
 
-import SearchBar from "./SearchBar";
-import SearchBarResults from "./SearchBarResults";
+// import SearchBar from "./SearchBar";
+// import SearchBarResults from "./SearchBarResults";
 
 const Header = () => {
   const { cartState } = useContext(CartContext);
   const { products } = cartState;
 
-  const [results, setResults] = useState([]);
+  // const [results, setResults] = useState([]);
 
   const totalProducts = products.reduce((accum, product) => {
     return accum + product.quantity;
@@ -24,12 +24,12 @@ const Header = () => {
           <Navbar.Brand as={Link} to="/">
             UnderFive
           </Navbar.Brand>
-          <SearchBar setResults={setResults} />
+          {/* <SearchBar setResults={setResults} /> */}
           <div>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className={HeaderCSS.links}>
-                <SearchBarResults results={results} />
+                {/* <SearchBarResults results={results} /> */}
                 <Nav.Link as={Link} to="/Favorites">
                   Favourite
                 </Nav.Link>
