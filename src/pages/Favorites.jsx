@@ -104,7 +104,11 @@ const Favorites = () => {
             <p className={FavoriteCSS.empty}>
               <FontAwesomeIcon icon={faFaceFrown} className="fa-xl me-2" />
               Your favorite games list is empty. To add products please return
-              to the <a href="/">store</a>.
+              to the{" "}
+              <a href="/" className={FavoriteCSS.store}>
+                store
+              </a>
+              .
               <FontAwesomeIcon
                 icon={faXmark}
                 size="xl"

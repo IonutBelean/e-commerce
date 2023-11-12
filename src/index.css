@@ -73,3 +73,7 @@ input[type="radio"] {
 .more a {
   color: red !important;
 }
+
+.store {
+  color: #eb455f !important;
+}

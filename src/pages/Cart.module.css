@@ -46,6 +46,11 @@
   font-weight: 600;
 }
 
+.store {
+  color: #eb455f !important;
+  font-weight: 600;
+}
+
 .delete {
   background-color: var(--bg-cart) !important;
   border: none !important;

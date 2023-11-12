@@ -12,6 +12,33 @@
   background-color: var(--bg-main);
 }
 
+.logo {
+  position: relative;
+  background-color: yellow !important;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-left: 20px;
+}
+
+.under {
+  transform: rotate(-45deg);
+  position: absolute;
+  top: 0;
+  left: -17px;
+  color: #2b3467;
+  font-weight: bolder;
+  font-size: 20px;
+}
+
+.five {
+  transform: rotate(45deg);
+  position: absolute;
+  left: 20px;
+  top: 15px;
+  color: #eb455f;
+}
+
 .links {
   display: flex;
   flex-direction: row !important;

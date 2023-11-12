@@ -70,7 +70,11 @@ const Cart = () => {
           <p className={CartCSS.empty}>
             <FontAwesomeIcon icon={faFaceFrown} className="fa-xl me-2" />
             Your shopping cart contains no products. To add products to the
-            basket, please return to the <a href="/">store</a>.
+            basket, please return to the{" "}
+            <a href="/" className={CartCSS.store}>
+              store
+            </a>
+            .
             <FontAwesomeIcon
               icon={faXmark}
               size="xl"

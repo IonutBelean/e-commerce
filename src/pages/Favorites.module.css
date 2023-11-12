@@ -37,14 +37,15 @@
   width: 100% !important;
 }
 
-.sad {
-  background-color: red;
-}
-
 .xmark {
   float: right;
   margin-top: 2px;
   cursor: pointer;
+}
+
+.store {
+  color: #eb455f !important;
+  font-weight: 600;
 }
 
 @media (max-width: 767px) {
