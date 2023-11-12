@@ -34,3 +34,9 @@
 .cart:hover {
   background-color: rgb(5, 5, 131) !important;
 }
+
+@media (max-width: 435px) {
+  .cart {
+    margin: 0 0 10px 10px;
+  }
+}

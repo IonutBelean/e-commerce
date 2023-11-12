@@ -8,7 +8,10 @@ const HeaderSecond = () => {
       <Container className={HeaderSecondCSS.container}>
         <div>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
+          <Navbar.Collapse
+            id="basic-navbar-nav"
+            className={`${HeaderSecondCSS.collapse} `}
+          >
             <Nav>
               <Nav.Link as={Link} to="/" className={HeaderSecondCSS.links}>
                 Home

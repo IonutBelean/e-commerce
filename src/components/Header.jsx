@@ -35,36 +35,36 @@ const Header = () => {
           </Navbar.Brand>
           {/* <SearchBar setResults={setResults} /> */}
           <div>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className={HeaderCSS.links}>
-                {/* <SearchBarResults results={results} /> */}
-                <Nav.Link as={Link} to="/Favorites">
-                  Favorites
-                  <span className={HeaderCSS.cart}>
-                    <FontAwesomeIcon
-                      icon={faCartShopping}
-                      className="fa-lg me-2"
-                    />
-                    {totalFav > 0 && (
-                      <p className={HeaderCSS.total_prods}>{favProd.length}</p>
-                    )}
-                  </span>
-                </Nav.Link>
-                <Nav.Link as={Link} to="/Cart">
-                  Cart
-                  <span className={HeaderCSS.cart}>
-                    <FontAwesomeIcon
-                      icon={faCartShopping}
-                      className="fa-lg me-2"
-                    />
-                    {totalProducts > 0 && (
-                      <p className={HeaderCSS.total_prods}>{totalProducts}</p>
-                    )}
-                  </span>
-                </Nav.Link>
-              </Nav>
-            </Navbar.Collapse>
+            {/* <Navbar.Toggle aria-controls="basic-navbar-nav" /> */}
+            {/* <Navbar.Collapse id="basic-navbar-nav"> */}
+            <Nav className={HeaderCSS.links}>
+              {/* <SearchBarResults results={results} /> */}
+              <Nav.Link as={Link} to="/Favorites">
+                Favorites
+                <span className={HeaderCSS.cart}>
+                  <FontAwesomeIcon
+                    icon={faCartShopping}
+                    className="fa-lg me-2"
+                  />
+                  {totalFav > 0 && (
+                    <p className={HeaderCSS.total_prods}>{favProd.length}</p>
+                  )}
+                </span>
+              </Nav.Link>
+              <Nav.Link as={Link} to="/Cart">
+                Cart
+                <span className={HeaderCSS.cart}>
+                  <FontAwesomeIcon
+                    icon={faCartShopping}
+                    className="fa-lg me-2"
+                  />
+                  {totalProducts > 0 && (
+                    <p className={HeaderCSS.total_prods}>{totalProducts}</p>
+                  )}
+                </span>
+              </Nav.Link>
+            </Nav>
+            {/* </Navbar.Collapse> */}
           </div>
         </Container>
       </Navbar>

@@ -15,6 +15,13 @@
   overflow: hidden;
 }
 
+.image {
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .price {
   display: flex;
   justify-content: center;

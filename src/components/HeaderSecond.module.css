@@ -1,7 +1,8 @@
 .nav {
-  background: radial-gradient(
-    circle,
-    rgba(235, 69, 95, 1) 0%,
+  background: linear-gradient(
+    90deg,
+    rgba(43, 52, 103, 1) 0%,
+    rgba(235, 69, 95, 1) 50%,
     rgba(43, 52, 103, 1) 100%
   );
   font-size: large;
@@ -16,4 +17,26 @@
 .links {
   margin: 0 15px;
   color: white !important;
+}
+
+@media (max-width: 990px) {
+  .collapse {
+    width: 100%;
+    font-size: 1.5rem;
+    backdrop-filter: blur(10px);
+    background: linear-gradient(
+      90deg,
+      rgba(43, 52, 103, 1) 0%,
+      rgba(235, 69, 95, 1) 50%,
+      rgba(43, 52, 103, 1) 100%
+    );
+    transition: all 0.5s ease-in;
+    position: absolute;
+    top: 56px;
+    left: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    padding-left: 30px;
+  }
 }

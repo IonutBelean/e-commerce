@@ -42,7 +42,7 @@ const Cart = () => {
                     <Col className={CartCSS.title}>
                       <h3>{product.title}</h3>
                     </Col>
-                    <Col>
+                    <Col className={CartCSS.image}>
                       <img src={product.image} alt="game" />
                     </Col>
                     <Col className={CartCSS.price}>
