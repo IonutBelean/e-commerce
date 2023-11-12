@@ -1,3 +1,13 @@
 .main {
   margin: 0 0 10px 12px;
+  position: relative;
+}
+
+.rating {
+  font-size: 18px;
+  font-weight: 600;
+  position: absolute;
+  left: 110px;
+  top: 1px;
+  width: 30px;
 }

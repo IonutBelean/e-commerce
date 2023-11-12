@@ -16,6 +16,10 @@
 }
 
 body {
+  background-color: antiquewhite;
+}
+
+body {
   background-color: var(--bg-main) !important;
 }
 
@@ -34,4 +38,25 @@ h2 {
 
 input[type="radio"] {
   display: none;
+}
+
+.button_cart {
+  background-color: var(--bg-cart) !important;
+  border: none !important;
+  width: 90%;
+  margin: 0 auto 5px auto;
+}
+
+.button_fav {
+  background-color: var(--bg-fav) !important;
+  border: none !important;
+  width: 90%;
+  margin: 0 auto 14px auto;
+}
+
+.button_fav:hover {
+  background-color: rgb(212, 37, 37) !important;
+}
+.button_cart:hover {
+  background-color: rgb(5, 5, 131) !important;
 }

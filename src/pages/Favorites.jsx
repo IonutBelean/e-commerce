@@ -49,35 +49,51 @@ const Favorites = () => {
   return (
     <LayoutSecond>
       <Container className={`${FavoriteCSS.container}`}>
-        <h2>My Favorites Games</h2>
+        <h2>My Favorite Games</h2>
+        {/* {isCartAlertDisplayed && (
+          <Alert variant="primary" className={FavoriteCSS.alert}>
+            Produsul a fost adaugat cu succes in Cos!
+          </Alert>
+        )} */}
         <Row>
           {favoritesState.products.length > 0 ? (
             favoritesState.products.map((product) => {
               return (
-                <Col lg={3} md={4} className="mb-4">
+                <Col lg={3} md={4} className="mb-4" key={product.id}>
                   <Card key={product.id}>
+                    <div className={FavoriteCSS.sales}>90%</div>
                     <Link to={`/GamesDetails/${product.id}`}>
-                      <Card.Body>
+                      <Card.Body className={FavoriteCSS.card_body}>
                         <Card.Img variant="top" src={product.image} />
-                        <Card.Title>{product.title} </Card.Title>
-                        <Card.Text>{product.rating} $</Card.Text>
+                        <Card.Title className={FavoriteCSS.title}>
+                          {product.title}{" "}
+                        </Card.Title>
+                        <Card.Text className={FavoriteCSS.price}>
+                          {product.rating} $
+                        </Card.Text>
                       </Card.Body>
                     </Link>
+                    <Button
+                      className="button_cart"
+                      onClick={() => handleAddToCart(product)}
+                    >
+                      Add to cart
+                    </Button>
+                    <Button
+                      onClick={() => handleDelete(product.id)}
+                      className="button_fav"
+                    >
+                      Remove from favorites
+                    </Button>
                   </Card>
-                  <Button onClick={() => handleDelete(product.id)}>
-                    Delete from favorites
-                  </Button>
-                  <Button onClick={() => handleAddToCart(product)}>
-                    Add to chart
-                  </Button>
                 </Col>
               );
             })
           ) : show ? (
             <p className={FavoriteCSS.empty}>
               <FontAwesomeIcon icon={faFaceFrown} className="fa-xl me-2" />
-              Your shopping cart contains no products. To add products to the
-              basket, please return to the <a href="/">store</a>.
+              Your favorite games list is empty. To add products please return
+              to the <a href="/">store</a>.
               <FontAwesomeIcon
                 icon={faXmark}
                 size="xl"

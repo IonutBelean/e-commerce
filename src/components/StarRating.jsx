@@ -1,26 +1,17 @@
 import { FaStar } from "react-icons/fa";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import StarRatingCSS from "./StarRating.module.css";
-
-const ratingFromLocalStorage = JSON.parse(
-  localStorage.getItem("rating") || null
-);
 
 const StarRrating = (props) => {
   const [rating, setRating] = useState(null);
   const [hover, setHover] = useState(null);
 
-  useEffect(() => {
-    window.localStorage.setItem("rating", JSON.stringify(rating));
-  }, [rating]);
-
   return (
     <div className={StarRatingCSS.main}>
       {[...Array(5)].map((star, key) => {
         const ratingValue = key + 1;
-
         return (
-          <label className={StarRatingCSS.container}>
+          <label className={StarRatingCSS.container} key={key}>
             <input
               className={StarRatingCSS.label}
               type="radio"
@@ -38,7 +29,7 @@ const StarRrating = (props) => {
           </label>
         );
       })}
-      <span>{rating}</span>
+      <span className={StarRatingCSS.rating}>{rating}</span>
     </div>
   );
 };

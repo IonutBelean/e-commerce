@@ -25,27 +25,6 @@ img {
   font-weight: 600;
 }
 
-.button_cart {
-  background-color: var(--bg-cart) !important;
-  border: none !important;
-  width: 90%;
-  margin: 0 auto 5px auto;
-}
-
-.button_fav {
-  background-color: var(--bg-fav) !important;
-  border: none !important;
-  width: 90%;
-  margin: 0 auto 14px auto;
-}
-
-.button_fav:hover {
-  background-color: red !important;
-  border: none !important;
-  width: 90%;
-  margin: 0 auto 14px auto;
-}
-
 .alert {
   position: fixed !important;
   top: 10px;
@@ -66,5 +45,4 @@ img {
   justify-content: center;
   align-items: center;
   font-weight: bold;
-  /* border: 1px solid black; */
 }

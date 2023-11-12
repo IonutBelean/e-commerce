@@ -3,17 +3,26 @@ import { Nav, Navbar, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { CartContext } from "../store/Cart/context";
 import HeaderCSS from "./Header.module.css";
+import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FavoritesContext } from "../store/Favorites/context";
 
 // import SearchBar from "./SearchBar";
 // import SearchBarResults from "./SearchBarResults";
 
 const Header = () => {
   const { cartState } = useContext(CartContext);
+  const { favoritesState } = useContext(FavoritesContext);
   const { products } = cartState;
+
+  const favProd = favoritesState.products;
 
   // const [results, setResults] = useState([]);
 
   const totalProducts = products.reduce((accum, product) => {
+    return accum + product.quantity;
+  }, 0);
+  const totalFav = favProd.reduce((accum, product) => {
     return accum + product.quantity;
   }, 0);
 
@@ -31,10 +40,28 @@ const Header = () => {
               <Nav className={HeaderCSS.links}>
                 {/* <SearchBarResults results={results} /> */}
                 <Nav.Link as={Link} to="/Favorites">
-                  Favourite
+                  Favorites
+                  <span className={HeaderCSS.cart}>
+                    <FontAwesomeIcon
+                      icon={faCartShopping}
+                      className="fa-lg me-2"
+                    />
+                    {totalFav > 0 && (
+                      <p className={HeaderCSS.total_prods}>{favProd.length}</p>
+                    )}
+                  </span>
                 </Nav.Link>
                 <Nav.Link as={Link} to="/Cart">
-                  Cart {totalProducts > 0 && `${totalProducts}`}
+                  Cart
+                  <span className={HeaderCSS.cart}>
+                    <FontAwesomeIcon
+                      icon={faCartShopping}
+                      className="fa-lg me-2"
+                    />
+                    {totalProducts > 0 && (
+                      <p className={HeaderCSS.total_prods}>{totalProducts}</p>
+                    )}
+                  </span>
                 </Nav.Link>
               </Nav>
             </Navbar.Collapse>

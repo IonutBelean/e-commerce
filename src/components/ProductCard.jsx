@@ -55,15 +55,15 @@ const ProductCard = (props) => {
     <div className={ProductCSS.main}>
       {isFavAlertDisplayed && (
         <Alert variant="success" className={ProductCSS.alert}>
-          Succes! Poți vedea produsul in Favorite.
+          Product successfully added to Favorites!
         </Alert>
       )}
       {isCartAlertDisplayed && (
         <Alert variant="primary" className={ProductCSS.alert}>
-          Produsul a fost adaugat cu succes in Cos!
+          Product successfully added to Cart!
         </Alert>
       )}
-      <Card className={ProductCSS.card} key={id}>
+      <Card key={id}>
         <div className={ProductCSS.sales}>90%</div>
         <Link to={`/GamesDetails/${id}`}>
           <Card.Body className={ProductCSS.card_body}>
@@ -75,16 +75,10 @@ const ProductCard = (props) => {
           </Card.Body>
         </Link>
         <StarRrating id={id} />
-        <Button
-          className={ProductCSS.button_cart}
-          onClick={() => handleAddToCart()}
-        >
+        <Button className="button_cart" onClick={() => handleAddToCart()}>
           Add to chart
         </Button>
-        <Button
-          className={ProductCSS.button_fav}
-          onClick={handleAddToFavorites}
-        >
+        <Button className="button_fav" onClick={handleAddToFavorites}>
           Add to favorites
         </Button>
       </Card>

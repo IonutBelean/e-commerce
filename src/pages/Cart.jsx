@@ -51,10 +51,8 @@ const Cart = () => {
                           {product.quantity}
                         </div>
                         <div className={CartCSS.amount}>
-                          {product.quantity * product.rating}$
+                          {(product.quantity * product.rating).toFixed(2)}$
                         </div>
-                        {/* {product.quantity} x {product.rating}$ ={" "}
-                        {product.quantity * product.rating}$ */}
                       </div>
                     </Col>
                   </Row>
