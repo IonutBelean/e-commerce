@@ -1,4 +1,3 @@
-import { Container } from "react-bootstrap";
 import FooterCSS from "./Footer.module.css";
 
 const Footer = () => {

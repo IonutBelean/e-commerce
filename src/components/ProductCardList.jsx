@@ -1,6 +1,5 @@
 import { Container, Row, Col } from "react-bootstrap";
 import ProductCard from "./ProductCard";
-import StarRrating from "./StarRating";
 
 const ProductCardList = (props) => {
   const { data } = props;

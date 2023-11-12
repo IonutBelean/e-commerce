@@ -1,7 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import AllGames from "./pages/AllGames";
-import "./App.css";
 import Cart from "./pages/Cart";
 import { useReducer } from "react";
 import { cartReducer, initialState } from "./store/Cart/reducer";
@@ -47,22 +46,20 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <FavoritesContext.Provider value={favoritesContextValue}>
-        <CartContext.Provider value={cartContextValue}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="Favorites" element={<Favorites />} />
-            <Route path="/Cart" element={<Cart />} />
-            <Route path="/AllGames" element={<AllGames />} />
-            <Route path="/ActionGames" element={<ActionGames />} />
-            <Route path="/RacingGames" element={<RacingGames />} />
-            <Route path="/ShooterGames" element={<ShooterGames />} />
-            <Route path="/GamesDetails/:gameId" element={<GamesDetails />} />
-          </Routes>
-        </CartContext.Provider>
-      </FavoritesContext.Provider>
-    </div>
+    <FavoritesContext.Provider value={favoritesContextValue}>
+      <CartContext.Provider value={cartContextValue}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="Favorites" element={<Favorites />} />
+          <Route path="/Cart" element={<Cart />} />
+          <Route path="/AllGames" element={<AllGames />} />
+          <Route path="/ActionGames" element={<ActionGames />} />
+          <Route path="/RacingGames" element={<RacingGames />} />
+          <Route path="/ShooterGames" element={<ShooterGames />} />
+          <Route path="/GamesDetails/:gameId" element={<GamesDetails />} />
+        </Routes>
+      </CartContext.Provider>
+    </FavoritesContext.Provider>
   );
 }
 

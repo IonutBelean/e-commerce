@@ -10,6 +10,7 @@ import FavoriteCSS from "./Favorites.module.css";
 import { faFaceFrown, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import LayoutSecond from "../components/LayoutSecond";
+import StarRrating from "../components/StarRating";
 
 const Favorites = () => {
   const { favoritesState, favoritesDispatch } = useContext(FavoritesContext);
@@ -81,6 +82,8 @@ const Favorites = () => {
                         </Card.Text>
                       </Card.Body>
                     </Link>
+                    <StarRrating id={product.id} />
+
                     <Button
                       className="button_cart"
                       onClick={() => handleAddToCart(product)}
