@@ -26,7 +26,7 @@ const Home = () => {
       <Container className={`${HomeCss.container} mb-5`}>
         <h1 className="text-center">Action Games</h1>
         <ProductCardList data={adaptedActionGamesList} />
-        <div className="text-center">
+        <div className="text-center more">
           More{" "}
           <Link to="/ActionGames/" className="text-secondary">
             Action
@@ -36,7 +36,7 @@ const Home = () => {
       <Container className="mb-5">
         <h1 className="text-center">Shooter Games</h1>
         <ProductCardList data={adaptedShooterGamesList} />
-        <div className="text-center">
+        <div className="text-center more">
           More{" "}
           <Link to="/ShooterGames/" className="text-secondary">
             Shooter
@@ -46,7 +46,7 @@ const Home = () => {
       <Container className="mb-5">
         <h1 className="text-center">Racing Games</h1>
         <ProductCardList data={adaptedRacingGamesList} />
-        <div className="text-center">
+        <div className="text-center more">
           More{" "}
           <Link to="/RacingGames/" className="text-secondary">
             Racing
