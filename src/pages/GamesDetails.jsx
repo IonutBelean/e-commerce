@@ -69,7 +69,7 @@ const GamesDetails = () => {
   return (
     <Layout>
       {isFavAlertDisplayed && (
-        <Alert variant="success" className="alert">
+        <Alert variant="danger" className="alert">
           Product successfully added to Favorites!
         </Alert>
       )}

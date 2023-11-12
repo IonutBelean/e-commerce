@@ -54,12 +54,12 @@ const ProductCard = (props) => {
   return (
     <div className={ProductCSS.main}>
       {isFavAlertDisplayed && (
-        <Alert variant="success" className={ProductCSS.alert}>
+        <Alert variant="danger" className="alert">
           Product successfully added to Favorites!
         </Alert>
       )}
       {isCartAlertDisplayed && (
-        <Alert variant="primary" className={ProductCSS.alert}>
+        <Alert variant="primary" className="alert">
           Product successfully added to Cart!
         </Alert>
       )}

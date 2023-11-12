@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Button, Card, Col, Row, Container } from "react-bootstrap";
+import { Button, Card, Col, Row, Container, Alert } from "react-bootstrap";
 import { removeFromFavorites } from "../store/Favorites/action";
 import { FavoritesContext } from "../store/Favorites/context";
 import { Link } from "react-router-dom";
@@ -15,6 +15,8 @@ const Favorites = () => {
   const { favoritesState, favoritesDispatch } = useContext(FavoritesContext);
   const { cartDispatch } = useContext(CartContext);
 
+  const [isCartAlertDisplayed, setIsCartAlertDisplayed] = useState(false);
+
   const handleAddToCart = (product) => {
     const cartToAdd = {
       id: product.id,
@@ -24,6 +26,11 @@ const Favorites = () => {
     };
     const actionResult = addToCart(cartToAdd);
     cartDispatch(actionResult);
+
+    setIsCartAlertDisplayed(true);
+    setTimeout(() => {
+      setIsCartAlertDisplayed(false);
+    }, 2500);
   };
 
   const [_, setLocalStorageState] = useLocalStorage(
@@ -50,11 +57,12 @@ const Favorites = () => {
     <LayoutSecond>
       <Container className={`${FavoriteCSS.container}`}>
         <h2>My Favorite Games</h2>
-        {/* {isCartAlertDisplayed && (
-          <Alert variant="primary" className={FavoriteCSS.alert}>
-            Produsul a fost adaugat cu succes in Cos!
+
+        {isCartAlertDisplayed && (
+          <Alert variant="primary" className="alert">
+            Product successfully added to Cart!
           </Alert>
-        )} */}
+        )}
         <Row>
           {favoritesState.products.length > 0 ? (
             favoritesState.products.map((product) => {
