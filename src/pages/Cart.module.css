@@ -67,3 +67,29 @@
   margin-top: 2px;
   cursor: pointer;
 }
+
+@media (max-width: 990px) {
+  .xmark {
+    margin-top: -59px;
+    margin-right: -11px;
+    background-color: #fff;
+    width: 30px;
+  }
+
+  .empty {
+    border-radius: 10px 0 10px 10px;
+  }
+}
+
+@media (max-width: 419px) {
+  .xmark {
+    margin-top: -82px;
+    margin-right: -11px;
+  }
+}
+@media (max-width: 301px) {
+  .xmark {
+    margin-top: -105px;
+    margin-right: -11px;
+  }
+}
