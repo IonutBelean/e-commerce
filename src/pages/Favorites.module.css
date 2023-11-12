@@ -46,3 +46,23 @@
   margin-top: 2px;
   cursor: pointer;
 }
+
+@media (max-width: 767px) {
+  .xmark {
+    margin-top: -59px;
+    margin-right: -13px;
+    background-color: #fff;
+    width: 30px;
+  }
+
+  .empty {
+    border-radius: 10px 0 10px 10px;
+  }
+}
+
+@media (max-width: 323px) {
+  .xmark {
+    margin-top: -82px;
+    margin-right: -11px;
+  }
+}
