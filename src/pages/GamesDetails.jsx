@@ -69,22 +69,22 @@ const GamesDetails = () => {
   return (
     <Layout>
       {isFavAlertDisplayed && (
-        <Alert variant="success" className={GamesDetailsCSS.alert}>
-          Succes! Poți vedea produsul in Favorite.
+        <Alert variant="success" className="alert">
+          Product successfully added to Favorites!
         </Alert>
       )}
       {isCartAlertDisplayed && (
-        <Alert variant="primary" className={GamesDetailsCSS.alert}>
-          Produsul a fost adaugat cu succes in Cos!
+        <Alert variant="primary" className="alert">
+          Product successfully added to Cart!
         </Alert>
       )}
-      <Container>
+      <Container className={GamesDetailsCSS.container}>
         <Row>
           <Col xs={12} lg={8} key={id}>
             <h1>{name}</h1>
-            <h6>{released}</h6>
+            <h3>{released}</h3>
             <img src={background_image_additional} alt="game" />
-            <p>{description}</p>
+            <p dangerouslySetInnerHTML={{ __html: description }}></p>
             <h5>Hours to play: {playtime}</h5>
             <h5>
               Official website:{" "}
@@ -92,8 +92,15 @@ const GamesDetails = () => {
                 {website}
               </a>
             </h5>
-            <Button onClick={handleAddToCart}>Add to cart</Button>
-            <Button onClick={handleAddToFavorites}>Add to Favorites</Button>
+            <Button onClick={handleAddToCart} className={GamesDetailsCSS.cart}>
+              Add to cart
+            </Button>
+            <Button
+              onClick={handleAddToFavorites}
+              className={GamesDetailsCSS.fav}
+            >
+              Add to Favorites
+            </Button>
           </Col>
         </Row>
       </Container>

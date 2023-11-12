@@ -23,7 +23,7 @@ const Home = () => {
 
   return (
     <Layout>
-      <Container className={` mb-5`}>
+      <Container className={`${HomeCss.container} mb-5`}>
         <h1 className="text-center">Action Games</h1>
         <ProductCardList data={adaptedActionGamesList} />
         <div className="text-center">

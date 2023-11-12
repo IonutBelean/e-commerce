@@ -5,6 +5,8 @@
     rgba(235, 69, 95, 1) 0%,
     rgba(43, 52, 103, 1) 100%
   );
+  font-size: large;
+  font-weight: 600;
 }
 .container {
   display: flex !important;

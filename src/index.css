@@ -60,3 +60,11 @@ input[type="radio"] {
 .button_cart:hover {
   background-color: rgb(5, 5, 131) !important;
 }
+
+.alert {
+  position: fixed !important;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
