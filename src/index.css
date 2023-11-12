@@ -1,9 +1,4 @@
 :root {
-  --text-primary: #101d42;
-  --text-secondary: #2bb686;
-  --text-dark: #2b2922;
-  --text-light: #eaeaea;
-
   --bg-cart: #2b3467;
   --bg-fav: #eb455f;
   --bg-main: #f2f2f7;
@@ -67,4 +62,18 @@ input[type="radio"] {
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
+}
+
+.more {
+  font-size: large;
+  font-weight: 700;
+  color: #2b3467;
+}
+
+.more a {
+  color: red !important;
+}
+
+.store {
+  color: #eb455f !important;
 }
