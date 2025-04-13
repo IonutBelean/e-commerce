@@ -11,6 +11,7 @@ import { faFaceFrown, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import LayoutSecond from "../components/LayoutSecond";
 import StarRrating from "../components/StarRating";
+import React from "react";
 
 const Favorites = () => {
   const { favoritesState, favoritesDispatch } = useContext(FavoritesContext);
@@ -34,10 +35,7 @@ const Favorites = () => {
     }, 2500);
   };
 
-  const [_, setLocalStorageState] = useLocalStorage(
-    "favorites",
-    favoritesState
-  );
+  const [, setLocalStorageState] = useLocalStorage("favorites", favoritesState);
 
   useEffect(() => {
     setLocalStorageState(favoritesState);
@@ -82,7 +80,7 @@ const Favorites = () => {
                         </Card.Text>
                       </Card.Body>
                     </Link>
-                    <StarRrating id={product.id} />
+                    <StarRrating gameId={product.id} />
 
                     <Button
                       className="button_cart"

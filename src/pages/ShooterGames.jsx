@@ -5,6 +5,7 @@ import Pagination from "../components/Pagination";
 import ProductCardList from "../components/ProductCardList";
 import { useLocation } from "react-router-dom";
 import { getGenresGamesEndpoint } from "../api/endpoints";
+import React from "react";
 
 const ShooterGames = () => {
   const queryParams = new URLSearchParams(useLocation().search);

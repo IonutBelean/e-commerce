@@ -5,7 +5,9 @@ import ProductCardList from "../components/ProductCardList";
 import { getGamesList } from "../api/adaptors";
 import { Link } from "react-router-dom";
 import { Container } from "react-bootstrap";
+import React from "react";
 
+import GameRecommender from "../components/GameRecommender";
 import HomeCss from "./Home.module.css";
 
 const Home = () => {
@@ -23,6 +25,17 @@ const Home = () => {
 
   return (
     <Layout>
+      <Container className={`mb-5 mt-4 ${HomeCss.recommenderHighlight}`}>
+        <h1 className="text-center mb-4">
+          <span role="img" aria-label="Video Game Controller">
+            🎮
+          </span>{" "}
+          What games to buy?
+        </h1>
+
+        <GameRecommender />
+      </Container>
+
       <Container className={`${HomeCss.container} mb-5`}>
         <h1 className="text-center">Action Games</h1>
         <ProductCardList data={adaptedActionGamesList} />
@@ -33,6 +46,7 @@ const Home = () => {
           </Link>
         </div>
       </Container>
+
       <Container className="mb-5">
         <h1 className="text-center">Shooter Games</h1>
         <ProductCardList data={adaptedShooterGamesList} />
@@ -43,6 +57,7 @@ const Home = () => {
           </Link>
         </div>
       </Container>
+
       <Container className="mb-5">
         <h1 className="text-center">Racing Games</h1>
         <ProductCardList data={adaptedRacingGamesList} />

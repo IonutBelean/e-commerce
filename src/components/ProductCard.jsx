@@ -8,6 +8,7 @@ import { addToFavorites } from "../store/Favorites/action";
 import { FavoritesContext } from "../store/Favorites/context";
 import { Alert } from "react-bootstrap";
 import StarRrating from "./StarRating";
+import React from "react";
 
 const ProductCard = (props) => {
   const { id, image, title, rating } = props;
@@ -74,7 +75,7 @@ const ProductCard = (props) => {
             </Card.Text>
           </Card.Body>
         </Link>
-        <StarRrating id={id} />
+        <StarRrating gameId={id} />
         <Button className="button_cart" onClick={() => handleAddToCart()}>
           Add to chart
         </Button>

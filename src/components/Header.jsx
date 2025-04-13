@@ -6,6 +6,7 @@ import HeaderCSS from "./Header.module.css";
 import { FavoritesContext } from "../store/Favorites/context";
 import { faCartShopping, fa5 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
 
 const Header = () => {
   const { cartState } = useContext(CartContext);

@@ -5,53 +5,36 @@ export const initialState = {
 export const cartReducer = (state, action) => {
   switch (action.type) {
     case "ADD_TO_CART": {
-      let updatedProducts;
-      let newState;
-
       const foundProduct = state.products.find(
         (product) => product.id === action.payload.id
       );
 
-      if (foundProduct) {
-        updatedProducts = state.products.map((product) => {
-          if (foundProduct.id === product.id) {
-            return {
-              ...product,
-              quantity: product.quantity + 1,
-            };
-          } else {
-            return product;
-          }
-        });
-      } else {
-        updatedProducts = [
-          ...state.products,
-          {
-            ...action.payload,
-            quantity: 1,
-          },
-        ];
-      }
+      const updatedProducts = foundProduct
+        ? state.products.map((product) =>
+            product.id === foundProduct.id
+              ? { ...product, quantity: product.quantity + 1 }
+              : product
+          )
+        : [...state.products, { ...action.payload, quantity: 1 }];
 
-      newState = {
-        products: updatedProducts,
-      };
-      return newState;
+      return { products: updatedProducts };
     }
 
     case "REMOVE_FROM_CART": {
-      let newState;
-
-      const filterProducts = state.products.filter(
+      const filteredProducts = state.products.filter(
         (product) => product.id !== action.payload
       );
-
-      newState = {
-        products: filterProducts,
-      };
-
-      return newState;
+      return { products: filteredProducts };
     }
+
+    case "UPDATE_QUANTITY": {
+      const { id, quantity } = action.payload;
+      const updatedProducts = state.products.map((product) =>
+        product.id === id ? { ...product, quantity } : product
+      );
+      return { products: updatedProducts };
+    }
+
     default:
       return state;
   }

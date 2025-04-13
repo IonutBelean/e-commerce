@@ -1,6 +1,7 @@
 import { Pagination as BootstrapPagination } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import PaginationCSS from "./Pagination.module.css";
+import React from "react";
 
 const Pagination = (props) => {
   const { currentPage, baseUrl } = props;

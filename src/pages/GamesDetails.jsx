@@ -9,6 +9,7 @@ import { addToCart } from "../store/Cart/actions";
 import { FavoritesContext } from "../store/Favorites/context";
 import { addToFavorites } from "../store/Favorites/action";
 import GamesDetailsCSS from "./GamesDetails.module.css";
+import React from "react";
 
 const GamesDetails = () => {
   const { cartDispatch } = useContext(CartContext);
@@ -88,7 +89,7 @@ const GamesDetails = () => {
             <h5>Hours to play: {playtime}</h5>
             <h5>
               Official website:{" "}
-              <a href={website} target="_blank" rel="noreferrer">
+              <a href={website} target="_blank" rel="noopener noreferrer">
                 {website}
               </a>
             </h5>

@@ -5,6 +5,7 @@ import { getGamesList } from "../api/adaptors";
 import Pagination from "../components/Pagination";
 import ProductCardList from "../components/ProductCardList";
 import { useLocation } from "react-router-dom";
+import React from "react";
 
 const ActionGames = () => {
   const queryParams = new URLSearchParams(useLocation().search);

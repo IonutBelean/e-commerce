@@ -11,3 +11,13 @@ export const removeFromCart = (productId) => {
     payload: productId,
   };
 };
+
+export const updateQuantity = (id, quantity) => {
+  return {
+    type: "UPDATE_QUANTITY",
+    payload: {
+      id,
+      quantity,
+    },
+  };
+};

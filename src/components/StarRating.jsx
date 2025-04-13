@@ -1,28 +1,42 @@
 import { FaStar } from "react-icons/fa";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import StarRatingCSS from "./StarRating.module.css";
+import React from "react";
 
-const StarRrating = (props) => {
+const StarRrating = ({ gameId }) => {
   const [rating, setRating] = useState(null);
   const [hover, setHover] = useState(null);
 
+  const localStorageKey = `rating-${gameId}`;
+
+  useEffect(() => {
+    const savedRating = localStorage.getItem(localStorageKey);
+    if (savedRating) {
+      setRating(Number(savedRating));
+    }
+  }, [localStorageKey]);
+
+  const handleClick = (value) => {
+    setRating(value);
+    localStorage.setItem(localStorageKey, value);
+  };
+
   return (
     <div className={StarRatingCSS.main}>
-      {[...Array(5)].map((star, key) => {
+      {[...Array(5)].map((_, key) => {
         const ratingValue = key + 1;
         return (
           <label className={StarRatingCSS.container} key={key}>
             <input
               className={StarRatingCSS.label}
               type="radio"
-              name="rating"
+              name={`rating-${gameId}`}
               value={ratingValue}
-              onClick={() => setRating(ratingValue)}
+              onClick={() => handleClick(ratingValue)}
             />
             <FaStar
               size={20}
               color={ratingValue <= (hover || rating) ? "#ffc107" : "#e4e5e9"}
-              value={ratingValue}
               onMouseEnter={() => setHover(ratingValue)}
               onMouseLeave={() => setHover(null)}
             />

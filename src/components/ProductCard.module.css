@@ -14,8 +14,8 @@ img {
 
 .title {
   height: 50px;
-  color: black;
-  font-weight: 500 !important;
+  color: black !important;
+  font-weight: 700 !important;
   margin-top: 5px !important;
 }
 
@@ -24,7 +24,6 @@ img {
   font-size: 1.4rem;
   font-weight: 600;
 }
-
 
 .sales {
   width: 70px;
