@@ -27,7 +27,10 @@ const GameRecommender = () => {
     try {
       const response = await fetch(getSearchGamesEndpoint(title));
       const data = await response.json();
-      if (!data.results || data.results.length === 0) return null;
+
+      if (!data.results || data.results.length === 0) {
+        throw new Error("No game results found.");
+      }
 
       const normalizedTitle = normalizeTitle(title);
 
@@ -79,6 +82,12 @@ const GameRecommender = () => {
       });
 
       const data = await response.json();
+      console.log("🔍 AI raw response:", data);
+
+      if (!data.result || typeof data.result !== "string") {
+        throw new Error("AI response is invalid or missing 'result'");
+      }
+
       const parsed = data.result
         .split(/\d+\.\s+/)
         .filter((r) => r.trim() !== "");
@@ -115,9 +124,13 @@ const GameRecommender = () => {
         }
       }, 100);
     } catch (error) {
-      console.error("AI function error:", error);
+      console.error("⚠️ AI function error:", error);
       setRecommendations([
-        { title: "An error occurred. Please try again.", id: null },
+        {
+          title:
+            "Oops! Something went wrong while generating recommendations. Please try again later.",
+          id: null,
+        },
       ]);
     } finally {
       setLoading(false);

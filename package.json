@@ -13,6 +13,7 @@
     "@testing-library/user-event": "^14.6.1",
     "axios": "^1.8.4",
     "bootstrap": "^5.3.3",
+    "dotenv": "^16.5.0",
     "netlify-cli": "^16.4.2",
     "openai": "^4.93.0",
     "react": "^19.1.0",

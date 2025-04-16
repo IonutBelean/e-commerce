@@ -1,5 +1,6 @@
 const axios = require("axios");
 require("dotenv").config(); // 🟢 ADĂUGAT pentru a încărca .env
+console.log("🔑 Cheia este:", process.env.OPENAI_API_KEY);
 
 exports.handler = async function (event) {
   try {
@@ -32,6 +33,9 @@ exports.handler = async function (event) {
         },
       }
     );
+
+    console.log("🔑 Cheia este:", process.env.OPENAI_API_KEY); //
+    console.log("✅ Răspuns OpenAI complet:", response.data);
 
     return {
       statusCode: 200,
