@@ -1,5 +1,0 @@
-[
-  { "id": 1, "title": "Celeste", "image": "celeste.jpg", "rating": 4.8 },
-  { "id": 2, "title": "Hollow Knight", "image": "hk.jpg", "rating": 4.9 },
-  { "id": 3, "title": "Dead Cells", "image": "dc.jpg", "rating": 4.7 }
-]
