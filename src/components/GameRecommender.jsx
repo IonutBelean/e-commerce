@@ -105,7 +105,7 @@ const GameRecommender = () => {
                               }
                               className={styles.favButton}
                             >
-                              ❤️ Add to Favorites
+                              Add to Favorites
                             </button>
                           )}
                         </div>
@@ -134,6 +134,12 @@ const GameRecommender = () => {
               <input
                 value={userMessage}
                 onChange={(e) => setUserMessage(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    handleSend();
+                  }
+                }}
                 placeholder="Ask me..."
                 className={styles.chatInput}
               />
