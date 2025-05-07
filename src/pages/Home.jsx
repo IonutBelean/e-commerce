@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import React from "react";
 
-import GameRecommender from "../components/GameRecommender";
 import HomeCss from "./Home.module.css";
 
 const Home = () => {
@@ -32,8 +31,6 @@ const Home = () => {
           </span>{" "}
           What games to buy?
         </h1>
-
-        <GameRecommender />
       </Container>
 
       <Container className={`${HomeCss.container} mb-5`}>

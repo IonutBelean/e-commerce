@@ -72,6 +72,7 @@ function App() {
           <Route path="/GamesDetails/:gameId" element={<GamesDetails />} />
           <Route path="/recommend" element={<GameRecommender />} />
         </Routes>
+        <GameRecommender />
       </CartContext.Provider>
     </FavoritesContext.Provider>
   );

@@ -1,262 +1,156 @@
-import React, { useState, useRef, useContext } from "react";
+import React, { useState, useContext } from "react";
 import styles from "./GameRecommender.module.css";
-import { getSearchGamesEndpoint } from "../api/endpoints";
 import { FavoritesContext } from "../store/Favorites/context";
 import { addToFavorites } from "../store/Favorites/action";
-import { Alert } from "react-bootstrap";
+import { Alert, Spinner } from "react-bootstrap";
 
 const GameRecommender = () => {
-  const [mood, setMood] = useState("");
-  const [time, setTime] = useState("");
-  const [genre, setGenre] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+  const [userMessage, setUserMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [recommendations, setRecommendations] = useState([]);
-  const [visibleCount, setVisibleCount] = useState(3);
+  const [aiMessage, setAiMessage] = useState("");
   const [alertMessage, setAlertMessage] = useState("");
 
   const { favoritesDispatch } = useContext(FavoritesContext);
-  const recommendationsRef = useRef(null);
 
-  const normalizeTitle = (title) =>
-    title
-      .toLowerCase()
-      .replace(/[^a-z0-9]/gi, "")
-      .trim();
+  const toggleChat = () => setIsOpen((prev) => !prev);
 
-  const fetchGameData = async (title) => {
-    try {
-      const response = await fetch(getSearchGamesEndpoint(title));
-      const data = await response.json();
-
-      if (!data.results || data.results.length === 0) {
-        throw new Error("No game results found.");
-      }
-
-      const normalizedTitle = normalizeTitle(title);
-
-      const match = data.results.find(
-        (game) => normalizeTitle(game.name) === normalizedTitle
-      );
-
-      const partialMatch = data.results.find((game) =>
-        normalizeTitle(game.name).includes(normalizedTitle)
-      );
-
-      const fallback = data.results[0];
-
-      const result = match || partialMatch || fallback;
-
-      return {
-        id: result.id,
-        name: result.name,
-        image: result.background_image,
-        rating: result.rating,
-      };
-    } catch (error) {
-      console.error("Error fetching game data:", error);
-      return null;
-    }
-  };
-
-  const extractTitle = (desc) => {
-    const quotedMatch = desc.match(/"(.+?)"/);
-    if (quotedMatch) return quotedMatch[1];
-
-    const fallbackMatch = desc.match(/^\s*([\w\s!:+&.'-]{3,40})\s+-/);
-    if (fallbackMatch) return fallbackMatch[1].trim();
-
-    return desc.split(" ").slice(0, 5).join(" ").trim();
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSend = async () => {
+    if (!userMessage.trim()) return;
     setLoading(true);
     setRecommendations([]);
-    setVisibleCount(3);
+    setAiMessage("");
 
     try {
       const response = await fetch("/.netlify/functions/gameRecommender", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ mood, time, genre }),
+        body: JSON.stringify({ message: userMessage }),
       });
 
       const data = await response.json();
-      console.log("🔍 AI raw response:", data);
 
-      if (!data.result || typeof data.result !== "string") {
-        throw new Error("AI response is invalid or missing 'result'");
+      if (!Array.isArray(data.result)) {
+        throw new Error("Invalid AI response format");
       }
 
-      const parsed = data.result
-        .split(/\d+\.\s+/)
-        .filter((r) => r.trim() !== "");
-
-      const enriched = await Promise.all(
-        parsed.map(async (desc) => {
-          const title = extractTitle(desc);
-          const game = await fetchGameData(title);
-
-          if (!game || normalizeTitle(game.name) !== normalizeTitle(title)) {
-            return null;
-          }
-
-          return {
-            title: desc.trim(),
-            id: game?.id || null,
-            image: game?.image || "",
-            name: game?.name || title,
-            rating: game?.rating || null,
-          };
-        })
-      );
-
-      const validRecommendations = enriched.filter(Boolean);
-      setRecommendations(validRecommendations);
-
-      setVisibleCount(
-        validRecommendations.length >= 3 ? 3 : validRecommendations.length
-      );
-
-      setTimeout(() => {
-        if (recommendationsRef.current) {
-          recommendationsRef.current.scrollIntoView({ behavior: "smooth" });
-        }
-      }, 100);
-    } catch (error) {
-      console.error("⚠️ AI function error:", error);
+      setAiMessage(data.aiMessage || "");
+      setRecommendations(data.result);
+    } catch (err) {
+      console.error("Error:", err);
       setRecommendations([
-        {
-          title:
-            "Oops! Something went wrong while generating recommendations. Please try again later.",
-          id: null,
-        },
+        { id: null, title: "Oops! Something went wrong. Please try again." },
       ]);
     } finally {
       setLoading(false);
     }
   };
 
-  const handleReset = () => {
-    setMood("");
-    setTime("");
-    setGenre("");
+  const handleClearResponse = () => {
+    setAiMessage("");
     setRecommendations([]);
-    setVisibleCount(3);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const handleShowMore = () => {
-    setVisibleCount((prev) => prev + 3);
+    setUserMessage("");
   };
 
   const handleAddToFavorites = (game) => {
     favoritesDispatch(addToFavorites(game));
-    setAlertMessage(`Product successfully added to Favorites!`);
-
+    setAlertMessage(`Game added to Favorites!`);
     setTimeout(() => setAlertMessage(""), 2500);
   };
 
   return (
-    <div className={styles.wrapper}>
-      <h2 className={styles.heading}>AI Game Recommendations</h2>
+    <>
+      <button onClick={toggleChat} className={styles.chatToggle}>
+        {isOpen ? "Close Chat" : "Chat with AI 🎮"}
+      </button>
 
-      <form onSubmit={handleSubmit}>
-        <label className={styles.formLabel}>Mood *</label>
-        <input
-          className={styles.input}
-          value={mood}
-          onChange={(e) => setMood(e.target.value)}
-          placeholder="relaxed, competitive..."
-        />
+      {isOpen && (
+        <div className={styles.chatboxWrapper}>
+          <div className={styles.chatbox}>
+            {(aiMessage || recommendations.length > 0 || loading) && (
+              <div className={styles.messages}>
+                {loading ? (
+                  <div className={styles.message}>
+                    <Spinner animation="border" size="sm" /> Generating...
+                  </div>
+                ) : (
+                  <>
+                    {aiMessage && (
+                      <div className={styles.message}>
+                        <p className={styles.aiMessage}>{aiMessage}</p>
+                      </div>
+                    )}
 
-        <label className={styles.formLabel}>Available Time *</label>
-        <input
-          className={styles.input}
-          value={time}
-          onChange={(e) => setTime(e.target.value)}
-          placeholder="30 min, 2 hours..."
-        />
+                    {recommendations.map((rec, idx) => (
+                      <div key={idx} className={styles.message}>
+                        <div className={styles.recommendationColumn}>
+                          <span className={styles.gameTitle}>{rec.title}</span>
+                          {rec.image && (
+                            <img
+                              src={rec.image}
+                              alt={rec.title}
+                              className={styles.thumbnailCentered}
+                            />
+                          )}
+                          {rec.id && (
+                            <button
+                              onClick={() =>
+                                handleAddToFavorites({
+                                  id: rec.id,
+                                  title: rec.title,
+                                  image: rec.image,
+                                  rating: rec.rating,
+                                })
+                              }
+                              className={styles.favButton}
+                            >
+                              ❤️ Add to Favorites
+                            </button>
+                          )}
+                        </div>
+                        {rec.description && (
+                          <p className={styles.description}>
+                            {rec.description}
+                          </p>
+                        )}
+                      </div>
+                    ))}
 
-        <label className={styles.formLabel}>Preferred Genre *</label>
-        <input
-          className={styles.input}
-          value={genre}
-          onChange={(e) => setGenre(e.target.value)}
-          placeholder="puzzle, racing..."
-        />
-
-        <button className={styles.button} disabled={loading}>
-          {loading ? "Generating..." : "Generate Recommendations"}
-        </button>
-      </form>
-
-      {alertMessage && (
-        <Alert variant="danger" className="alert">
-          {alertMessage}
-        </Alert>
-      )}
-
-      {recommendations.length > 0 && (
-        <div ref={recommendationsRef} className={styles.cards}>
-          {recommendations
-            .filter((rec) => rec.id)
-            .slice(0, visibleCount)
-            .map((rec, idx) => (
-              <div key={idx} className={styles.card}>
-                <h5 className={styles.cardTitle}>
-                  <span role="img" aria-label="video game controller">
-                    🎮
-                  </span>{" "}
-                  Game {idx + 1}
-                </h5>
-
-                <p className={styles.cardText}>{rec.title}</p>
-                <div className={styles.cardButtons}>
-                  <a
-                    href={`/GamesDetails/${rec.id}`}
-                    className={styles.detailsButton}
-                  >
-                    View Details
-                  </a>
-                  <button
-                    className={styles.favButton}
-                    onClick={() =>
-                      handleAddToFavorites({
-                        id: rec.id,
-                        image: rec.image,
-                        title: rec.name,
-                        rating: rec.rating,
-                      })
-                    }
-                  >
-                    Add to Favorites
-                  </button>
-                </div>
+                    {(aiMessage || recommendations.length > 0) && (
+                      <button
+                        onClick={handleClearResponse}
+                        className={styles.clearButton}
+                      >
+                        Clear Response
+                      </button>
+                    )}
+                  </>
+                )}
               </div>
-            ))}
+            )}
 
-          <div className={styles.actionsContainer}>
-            <button
-              type="button"
-              className={styles.resetButton}
-              onClick={handleReset}
-            >
-              Reset
-            </button>
-            {visibleCount < recommendations.filter((r) => r.id).length && (
-              <button
-                type="button"
-                className={styles.showMoreButton}
-                onClick={handleShowMore}
-              >
-                Show More
+            <div className={styles.inputWrapper}>
+              <input
+                value={userMessage}
+                onChange={(e) => setUserMessage(e.target.value)}
+                placeholder="Ask me..."
+                className={styles.chatInput}
+              />
+              <button onClick={handleSend} className={styles.sendButton}>
+                Send
               </button>
+            </div>
+
+            {alertMessage && (
+              <Alert variant="success" className={styles.alert}>
+                {alertMessage}
+              </Alert>
             )}
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 
