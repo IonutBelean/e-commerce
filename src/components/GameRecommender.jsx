@@ -26,12 +26,18 @@ const GameRecommender = () => {
       const response = await fetch("/.netlify/functions/gameRecommender", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: userMessage }),
+        body: JSON.stringify({
+          query: userMessage,
+          mood: "",
+          time: "",
+          genre: "",
+          year: "",
+        }),
       });
 
       const data = await response.json();
 
-      if (!Array.isArray(data.result)) {
+      if (!data || !Array.isArray(data.result)) {
         throw new Error("Invalid AI response format");
       }
 
@@ -140,7 +146,7 @@ const GameRecommender = () => {
                     handleSend();
                   }
                 }}
-                placeholder="Ask me..."
+                placeholder="Ask me about a game, genre or year..."
                 className={styles.chatInput}
               />
               <button onClick={handleSend} className={styles.sendButton}>
