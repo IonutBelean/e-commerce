@@ -1,5 +1,4 @@
 const axios = require("axios");
-require("dotenv").config();
 
 const API_KEY = "a6cc911b4877423191322ec9e1af7479";
 
@@ -66,20 +65,29 @@ exports.handler = async function (event) {
       };
     }
 
-    let aiText = "";
+    let aiMessage = "";
+    let mentionedGames = [];
+
     if (query) {
       const availableTitles = allGames.map((g) => g.name);
-      const prompt = `Utilizatorul a întrebat: "${query}". Folosește DOAR titlurile din lista: ${availableTitles.join(
-        ", ",
-      )}.\n`;
+      const prompt = `Utilizatorul a întrebat: "${query}".
+Lista de titluri disponibile este: ${availableTitles.join(", ")}.
+
+Selectează DOAR titluri care apar EXACT (caracter cu caracter) în lista de mai sus și care se potrivesc cerinței utilizatorului.
+Răspunde STRICT cu un obiect JSON valid, fără text adițional, fără ghilimele de cod markdown, în formatul:
+{"message": "un mesaj scurt, conversational, in limba romana", "titles": ["Titlu Exact 1", "Titlu Exact 2"]}
+Dacă niciun titlu din listă nu se potrivește, returnează "titles": [].`;
+
       const response = await axios.post(
         "https://api.openai.com/v1/chat/completions",
         {
           model: "gpt-3.5-turbo",
+          response_format: { type: "json_object" },
           messages: [
             {
               role: "system",
-              content: "Ești un asistent pentru jocuri video.",
+              content:
+                "Ești un asistent pentru jocuri video. Răspunzi mereu strict în formatul JSON cerut, fără text în afara obiectului JSON.",
             },
             { role: "user", content: prompt },
           ],
@@ -91,16 +99,26 @@ exports.handler = async function (event) {
           },
         },
       );
-      aiText = response?.data?.choices?.[0]?.message?.content || "";
-    }
 
-    let mentionedGames = allGames.filter((g) =>
-      aiText
-        ? new RegExp(g.name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i").test(
-            aiText,
-          )
-        : false,
-    );
+      const rawContent = response?.data?.choices?.[0]?.message?.content || "{}";
+
+      let parsed;
+      try {
+        parsed = JSON.parse(rawContent);
+      } catch (parseErr) {
+        console.error("❌ AI nu a returnat JSON valid:", rawContent);
+        parsed = { message: "", titles: [] };
+      }
+
+      aiMessage = parsed.message || "";
+
+      const titlesFromAi = Array.isArray(parsed.titles) ? parsed.titles : [];
+      const normalizedRequested = new Set(titlesFromAi.map(normalize));
+
+      mentionedGames = allGames.filter((g) =>
+        normalizedRequested.has(normalize(g.name)),
+      );
+    }
 
     if (mentionedGames.length === 0) {
       let filtered = allGames;
@@ -129,7 +147,7 @@ exports.handler = async function (event) {
       body: JSON.stringify({
         aiMessage:
           result.length > 0
-            ? aiText ||
+            ? aiMessage ||
               `Am selectat câteva jocuri pentru tine din genul "${
                 genre || "aleator"
               }".`
