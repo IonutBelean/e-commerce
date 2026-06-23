@@ -25,19 +25,19 @@ import { FavoritesContext } from "./store/Favorites/context";
 function App() {
   const [initialLocalStorageState] = useLocalStorage(
     "favorites",
-    initialFavoritesState
+    initialFavoritesState,
   );
 
   const [initialCartLocalStorageState] = useLocalStorage("cart", initialState);
 
   const [cartState, cartDispatch] = useReducer(
     cartReducer,
-    initialCartLocalStorageState
+    initialCartLocalStorageState,
   );
 
   const [favoritesState, favoritesDispatch] = useReducer(
     favoritesReducer,
-    initialLocalStorageState
+    initialLocalStorageState,
   );
 
   useEffect(() => {
@@ -63,7 +63,7 @@ function App() {
       <CartContext.Provider value={cartContextValue}>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="Favorites" element={<Favorites />} />
+          <Route path="/Favorites" element={<Favorites />} />
           <Route path="/Cart" element={<Cart />} />
           <Route path="/AllGames" element={<AllGames />} />
           <Route path="/ActionGames" element={<ActionGames />} />
@@ -72,7 +72,6 @@ function App() {
           <Route path="/GamesDetails/:gameId" element={<GamesDetails />} />
           <Route path="/recommend" element={<GameRecommender />} />
         </Routes>
-        <GameRecommender />
       </CartContext.Provider>
     </FavoritesContext.Provider>
   );

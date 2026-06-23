@@ -26,7 +26,7 @@ const RacingGames = () => {
     <Layout>
       <h1 className="text-center">Racing Games</h1>
       <ProductCardList data={adaptedGamesList} />
-      <Pagination currentPage={currentPage} baseUrl="/ActionGames/" />
+      <Pagination currentPage={currentPage} baseUrl="/RacingGames/" />
     </Layout>
   );
 };

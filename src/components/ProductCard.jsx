@@ -77,7 +77,7 @@ const ProductCard = (props) => {
         </Link>
         <StarRrating gameId={id} />
         <Button className="button_cart" onClick={() => handleAddToCart()}>
-          Add to chart
+          Add to cart
         </Button>
         <Button className="button_fav" onClick={handleAddToFavorites}>
           Add to favorites
